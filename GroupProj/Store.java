@@ -40,20 +40,21 @@ public class Store extends HttpServlet {
 		request.getSession().setAttribute("error", null);
 		request.getSession().setAttribute("usernameError", null);
 		request.getSession().setAttribute("passwordError", null);
+		request.getSession().setAttribute("count", "first");
 		
 		List<InventoryEntry> inventory = new ArrayList<>();
 		String query = request.getParameter("query")==null?"":request.getParameter("query");
 		
 		if(request.getSession().getAttribute("user")==null){
-			response.sendRedirect("../Login.jsp");
+			response.sendRedirect("Login");
 		}else{
 		
 		Connection c = null;
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-            String username = "";
-            String password = "";
+            String username = "cs3220stu27";
+            String password = "t1##a*!#";
 
             c = DriverManager.getConnection( url, username, password );
             Statement stmt = c.createStatement();
@@ -90,7 +91,7 @@ public class Store extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
-		response.sendRedirect("../Login.jsp");
+		response.sendRedirect("Login");
 	}
 
 }

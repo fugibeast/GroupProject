@@ -42,8 +42,8 @@ public class Add extends HttpServlet {
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-            String username = "";
-            String password = "";
+            String username = "cs3220stu27";
+            String password = "t1##a*!#";
 
             String sql = "insert inventory (name, description, quantity, price) values (?,?,?,?)";
 
@@ -75,7 +75,7 @@ public class Add extends HttpServlet {
         response.sendRedirect("Store");
 		}else{
 			request.getSession().setAttribute("addError", "Make sure all fields have valid entries.");
-			response.sendRedirect("../Add.jsp");
+			request.getRequestDispatcher( "/WEB-INF/Add.jsp" ).forward(request, response );
 		}
 	}
 
@@ -103,8 +103,8 @@ public class Add extends HttpServlet {
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-            String username = "";
-            String password = "";
+            String username = "cs3220stu27";
+            String password = "t1##a*!#";
             
             c = DriverManager.getConnection( url, username, password );
             Statement stmt = c.createStatement();

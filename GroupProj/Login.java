@@ -34,16 +34,22 @@ public class Login extends HttpServlet {
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("user", null);
-		String username1= request.getParameter("username")==null?"no":request.getParameter("username");
-		String password1 = request.getParameter("password")==null?"no":request.getParameter("password");
+		
+		doPost(request, response);
+
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username1= request.getParameter("username")==null?"":request.getParameter("username");
+		String password1 = request.getParameter("password")==null?"":request.getParameter("password");
 	
 		Connection c = null;
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-            String username = "";
-            String password = "";
+            String username = "cs3220stu27";
+            String password = "t1##a*!#";
 
             c = DriverManager.getConnection( url, username, password );
             Statement stmt = c.createStatement();
@@ -73,20 +79,18 @@ public class Login extends HttpServlet {
             }
         }
 		if(request.getSession().getAttribute("user")==null){
-			request.getSession().setAttribute("error", "Your username/password is incorrect!");
+			String count = (String) (request.getSession().getAttribute("count")==null?"first":request.getSession().getAttribute("count"));
+			if(count.equals("first")){
+				request.getSession().setAttribute("count", "second");
+			}else if(count.equals("second")){
+				request.getSession().setAttribute("loginError", "Your username and/or password is incorrect!");
+			}
 		}
 		if(request.getSession().getAttribute("user")!=null){
 			request.getSession().setAttribute("error", null);
-			doPost(request, response);
+			response.sendRedirect("Store");
 		}else
-		response.sendRedirect("../Login.jsp");
-
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect("Store");
+			request.getRequestDispatcher( "/WEB-INF/Login.jsp" ).forward(request, response );
 		
 	}
 
