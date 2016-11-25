@@ -58,8 +58,8 @@ public class SignUp extends HttpServlet {
 	        try
 	        {
 	            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-	            String username = "cs3220stu27";
-	            String password = "t1##a*!#";
+	            String username = "";
+	            String password = "";
 
 	            c = DriverManager.getConnection( url, username, password );
 	            
