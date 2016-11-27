@@ -14,7 +14,8 @@ EDIT 2:
 -Updated servlets and classes are in Controllers/Models folder.
 
 -Updated jsp files are in WEB-INF folder
--updated sql files are in main folder.
+
+-Updated sql files are in main folder.
 
 EDIT 1: 
 
