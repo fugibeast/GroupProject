@@ -9,12 +9,12 @@
 <title>Tubular Store</title>
 </head>
 <body>
+	<h1 align="center">Inventory <small>Management</small></h1>
 	<div class="container">
-		<div class="container" align="center">
-		<h2>Store</h2>
-		</div>
+		<h2>Store Inventory <small><a href="Add">[Add Item]</a></small></h2>
+		
 		<div class="fluid">
-		<form class="form-inline" action ="Store" method="get">
+		<form class="form-inline" action ="Inventory" method="get">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class='btn btn-primary btn-lg' type='submit'>
@@ -22,24 +22,16 @@
 					</button>
 				</span>
 			</div>
-			
+
 			<div class="input-group">
 				<input type='text' class='form-control' name='query' placeholder='Search for an item'>
-			</div>
-			
-			<div class="input-group" style="float:right">
-				<a href="ShoppingCart">
-					<button type="button" class="btn btn-default btn-lg">
-	  					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [${cartAmount}]
-					</button>
-				</a>
 			</div>
 		</form>
 		</div>
 		<br/>
 		
 		<c:choose>
-			<c:when test="${empty storeInventory}">
+			<c:when test="${empty inventory}">
 				<div class="jumbotron">
 				<h3 class="text-center" style="color:#ffa366"> Yikes! There are no items to display</h3>
 				</div>
@@ -49,16 +41,12 @@
 					<tr>
 						<th>Item</th> <th>Quantity</th> <th>Price(each)</th> <th>Action</th>
 					</tr>
-					<c:forEach items="${storeInventory}" var="item">
+					<c:forEach items="${inventory}" var="item">
 						<tr>
-							<td><a href="ItemDetail?id=${item.id}"><c:out value="${item.name}" escapeXml="true" /></a> <td>${item.quantity}</td> <td>${item.price}</td> 
+							<td><a href="ItemDetail?id=${item.id}"><c:out value="${item.name}" escapeXml="true" /></a></td> <td>${item.quantity}</td> <td>${item.price}</td> 
 							<td>
-								<form class="form-inline" action="Add" method="post">
-								<input type="hidden" name="max" value="${item.quantity}">
-								<input type="hidden" name="id" value="${item.id}">
-								<input type="number" class="form-control" name="quantity" placeholder="Enter Quantity" min="1" max="${item.quantity}">
-								<input class="btn btn-primary" type="submit" value="Add to Cart">
-								</form>
+								<a href="Remove?id=${item.id}"><button class="btn btn-danger">Remove</button></a>
+								<a href="Edit?id=${item.id}"><button class="btn btn-primary">Edit</button></a>
 							</td>
 						</tr>
 					</c:forEach>
