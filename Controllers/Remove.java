@@ -29,9 +29,9 @@ public class Remove extends HttpServlet {
 			Connection c = null;
 	        try
 	        {
-	            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu27";
-	            String username = "cs3220stu27";
-	            String password = "t1##a*!#";
+	            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu";
+	            String username = "";
+	            String password = "";
 	
 	            String sql = "delete from inventory where id=?";
 	
